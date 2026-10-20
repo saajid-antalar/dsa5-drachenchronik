@@ -1,0 +1,8 @@
+<form>
+  <div class="form-group">
+    <label for="day">Aventurischer Kalendertag</label>
+    <input id="day" name="day" type="text" placeholder="z. B. 12. Praios 1047 BF" value="" required>
+    <p class="notes">Pro eingetragenem Kalendertag ist ein Ereignis für die gesamte Welt möglich.</p>
+  </div>
+  <p>Zuletzt ausgelöst: <strong>{{#if lastDay}}{{lastDay}}{{else}}noch keines{{/if}}</strong></p>
+</form>
