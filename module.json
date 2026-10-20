@@ -9,20 +9,6 @@
   "flags": {
     "canUpload": true
   },
-  "packs": [
-    {
-      "name": "Akteur",
-      "label": "DSA5 – Drachenchronik",
-      "path": "packs/Akteur",
-      "type": "Actor",
-      "system": "dsa5",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      },
-      "flags": {}
-    }
-  ],
   "relationships": {
     "systems": [
       {
