@@ -8,12 +8,10 @@ Das Modul verwendet die zentrale Foundry-Weltzeit und den aktiven Aventurien-Kal
 
 Beim Start der Welt erstellt das Modul die Makros **☀️ Tagesereignis** und **☀️ Tagesereignis – GM Reset**. Das Ergebnis erscheint ausschließlich bei der Spielleitung als Dialog und Whisper.
 
-Dieses Modul enthält derzeit keine Compendium-Packs.
+## Szenenkompendium: Oase Bischa
 
-## Testinstallation
+Das Modul enthält die gridlose Szene **Oase Bischa** mit der vollflächigen 8K-Karte (7680 × 5456 Pixel). Öffne im Szenen-Kompendium den Pack **Oase Bischa** und importiere die Szene in deine Welt.
 
-Installationsmanifest für den Teststand **1.1.0-test.1**:
+## Version 1.1.1
 
-`https://github.com/saajid-antalar/dsa5-drachenchronik/releases/download/v1.1.0-test.1/module.json`
-
-Das Manifest wird erst installierbar, sobald das GitHub-Testrelease mit diesem Tag und der Datei `dsa5-drachenchronik.zip` veröffentlicht ist.
+Die aktuelle Version wird über das Foundry-Installationsmanifest auf dem Hauptzweig und das neueste GitHub-Release verteilt.
