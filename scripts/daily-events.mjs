@@ -54,7 +54,7 @@ class DailyEventDialog extends FormApplication {
 
   getData() {
     const usedDays = game.settings.get(MODULE_ID, "usedAventurianDays");
-    const lastDay = Object.keys(usedDays).at(-1) ?? "";
+    const lastDay = Object.values(usedDays).at(-1) ?? "";
     return { lastDay };
   }
 
