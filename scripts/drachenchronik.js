@@ -234,7 +234,7 @@ async function processRequest(userId) {
   if (!game.user.isGM) return;
 
   const user = game.users.get(userId);
-  if (!user || user.isGM) return;
+  if (!user) return;
 
   const currentDate = getDateKey();
   const lastDate = game.settings.get(MODULE_ID, SETTING_KEY);
