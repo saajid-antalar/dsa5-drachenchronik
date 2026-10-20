@@ -327,14 +327,14 @@ async function ensureMacros() {
 
   await createOrUpdateMacro({
     name: "☀️ Tagesereignis",
-    img: "modules/${MODULE_ID}/assets/sun.svg",
+    img: `modules/${MODULE_ID}/assets/sun.svg`,
     defaultOwnership: observer,
     command: `game.modules.get("${MODULE_ID}")?.api?.trigger();`
   });
 
   await createOrUpdateMacro({
     name: "☀️ Tagesereignis – GM Reset",
-    img: "modules/${MODULE_ID}/assets/reset.svg",
+    img: `modules/${MODULE_ID}/assets/reset.svg`,
     defaultOwnership: none,
     command: `game.modules.get("${MODULE_ID}")?.api?.reset();`
   });
