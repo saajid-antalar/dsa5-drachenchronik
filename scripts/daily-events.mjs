@@ -31,10 +31,6 @@ Hooks.once("init", () => {
     type: String,
     default: ""
   });
-});
-
-Hooks.once("ready", () => {
-  if (!game.user.isGM) return;
   game.settings.registerMenu(MODULE_ID, "dailyEventMenu", {
     name: "Tagesereignis der Khôm",
     label: "Tagesereignis auslösen",
@@ -69,6 +65,9 @@ class DailyEventDialog extends FormApplication {
       return ui.notifications.warn(`Für ${day} wurde bereits ein Tagesereignis ausgelöst.`);
     }
 
+    // Reserve this Aventurian date before asynchronous work so a second GM cannot immediately reroll it.
+    await game.settings.set(MODULE_ID, "lastAventurianDay", day);
+
     const roll = await (new Roll("1d20")).evaluate();
     const index = Math.clamp(Number(roll.total) - 1, 0, EVENTS.length - 1);
     const [title, description] = EVENTS[index];
@@ -91,7 +90,6 @@ class DailyEventDialog extends FormApplication {
       whisper: gmIds,
       speaker: ChatMessage.getSpeaker({ alias: "Drachenchronik" })
     });
-    await game.settings.set(MODULE_ID, "lastAventurianDay", day);
     new Dialog({
       title: "Tagesereignis der Khôm",
       content,
