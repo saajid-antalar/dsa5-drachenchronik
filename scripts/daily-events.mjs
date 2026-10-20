@@ -31,7 +31,6 @@ Hooks.once("init", () => {
     type: Object,
     default: {}
   });
-  game.settings.registerMenu
   game.settings.registerMenu(MODULE_ID, "dailyEventMenu", {
     name: "Tagesereignis der Khôm",
     label: "Tagesereignis auslösen",
@@ -60,9 +59,9 @@ class DailyEventDialog extends FormApplication {
   }
 
   async _updateObject(_event, formData) {
-    const day = String(formData.day ?? "").trim().replace(/\\s+/g, " ");
+    const day = String(formData.day ?? "").trim().replace(/\s+/g, " ");
     if (!day) return ui.notifications.warn("Bitte den aventurischen Kalendertag eintragen.");
-    const dayKey = day.normalize("NFKC").toLocaleLowerCase("de").replace(/[.,]/g, "").replace(/\\s+/g, " ");
+    const dayKey = day.normalize("NFKC").toLocaleLowerCase("de").replace(/[.,]/g, "").replace(/\s+/g, " ");
 
     const usedDays = game.settings.get(MODULE_ID, "usedAventurianDays");
     if (usedDays[dayKey]) {
