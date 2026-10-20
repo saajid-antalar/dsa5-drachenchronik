@@ -1,13 +1,11 @@
 # DSA5 – Drachenchronik
 
-Foundry-VTT-Modul für Foundry VTT 14 und DSA5 8.1.11.
+## Tagesereignis-Generator
 
-## Tagesereignis der Khôm
+Foundry VTT V14 / DSA5 8.1.x.
 
-Die Spielleitung öffnet **Einstellungen → Modul-Einstellungen → Drachenchronik → Tagesereignis auslösen**. Sie gibt den aventurischen Kalendertag ein. Pro identischem Kalendertag lässt das Modul global in der Welt nur einen Auswurf zu – unabhängig von Sitzungen oder verstrichenen Echtzeitstunden. Ein anderes Datum erlaubt den nächsten Auswurf.
+Das Modul verwendet die zentrale Foundry-Weltzeit und `game.time.components` für die Tages-Sperre. Dadurch wird ein Ereignis pro aventurischem Kalendertag ausgelöst, unabhängig davon, welcher Spieler den Knopf betätigt.
 
-Das Ergebnis wird als Dialog angezeigt und ausschließlich an Spielleitungen geflüstert. Das Modul bestimmt zufällig, ob das Ereignis die Gruppe oder einen einzelnen Helden betrifft. Sind keine spielergeführten Helden vorhanden, betrifft es die Gruppe.
+### Installation in ein bestehendes Modul
 
-## Aktueller Stand
-
-Der Ereigniskatalog in `scripts/daily-events.mjs` ist ein vorläufiger, eigens formulierter Khôm-Katalog. Die konkreten Tabelleninhalte aus der vorherigen Unterhaltung waren im verfügbaren Gesprächsverlauf nicht enthalten. Vorhandene Akteur-Packs wurden nicht angelegt oder verändert; für deren Integration werden die bestehenden Dateien des lokalen Moduls benötigt.
+Dieses Modul ist als Erweiterung des bestehenden Moduls `dsa5-drachenchronik` gedacht. Beim Ersetzen der Dateien sollte der vorhandene Ordner `packs/` erhalten bleiben.
