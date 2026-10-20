@@ -4,8 +4,7 @@
   "description": "Kampagnenmodul für DSA5 mit täglichem Khôm-Ereignisgenerator.",
   "version": "0.1.0",
   "compatibility": {
-    "minimum": "14",
-    "verified": "14"
+    "minimum": "14"
   },
   "authors": [
     {
@@ -16,5 +15,13 @@
     "scripts/daily-events.mjs"
   ],
   "manifest": "https://github.com/saajid-antalar/dsa5-drachenchronik/releases/latest/download/module.json",
-  "download": "https://github.com/saajid-antalar/dsa5-drachenchronik/releases/latest/download/dsa5-drachenchronik.zip"
+  "download": "https://github.com/saajid-antalar/dsa5-drachenchronik/releases/latest/download/dsa5-drachenchronik.zip",
+  "relationships": {
+    "systems": [
+      {
+        "id": "dsa5",
+        "type": "system"
+      }
+    ]
+  }
 }
