@@ -1,7 +1,7 @@
 {
   "id": "dsa5-drachenchronik",
   "title": "DSA5 – Drachenchronik",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "compatibility": {
     "minimum": "14",
     "verified": "14"
@@ -25,5 +25,13 @@
     "scripts/drachenchronik.js"
   ],
   "socket": true,
-  "url": "https://github.com/saajid-antalar/dsa5-drachenchronik"
+  "url": "https://github.com/saajid-antalar/dsa5-drachenchronik",
+  "packs": [
+    {
+      "name": "oase-bischa",
+      "label": "Oase Bischa",
+      "path": "./packs/oase-bischa",
+      "type": "Scene"
+    }
+  ]
 }
