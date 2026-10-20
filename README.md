@@ -9,3 +9,11 @@ Das Modul verwendet die zentrale Foundry-Weltzeit und den aktiven Aventurien-Kal
 Beim Start der Welt erstellt das Modul die Makros **☀️ Tagesereignis** und **☀️ Tagesereignis – GM Reset**. Das Ergebnis erscheint ausschließlich bei der Spielleitung als Dialog und Whisper.
 
 Dieses Modul enthält derzeit keine Compendium-Packs.
+
+## Testinstallation
+
+Installationsmanifest für den Teststand **1.1.0-test.1**:
+
+`https://github.com/saajid-antalar/dsa5-drachenchronik/releases/download/v1.1.0-test.1/module.json`
+
+Das Manifest wird erst installierbar, sobald das GitHub-Testrelease mit diesem Tag und der Datei `dsa5-drachenchronik.zip` veröffentlicht ist.
