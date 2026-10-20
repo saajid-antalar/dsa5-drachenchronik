@@ -1,7 +1,7 @@
 {
   "id": "dsa5-drachenchronik",
   "title": "DSA5 – Drachenchronik",
-  "version": "1.1.0-test.4",
+  "version": "1.1.0-test.5",
   "compatibility": {
     "minimum": "14",
     "verified": "14"
@@ -19,8 +19,8 @@
     ]
   },
   "description": "DrachenChronik-Erweiterungen für DSA5. Enthält den täglichen Reiseereignis-Generator für die Khôm mit aventurischer Tages-Sperre.",
-  "manifest": "https://raw.githubusercontent.com/saajid-antalar/dsa5-drachenchronik/v1.1.0-test.4/module.json",
-  "download": "https://github.com/saajid-antalar/dsa5-drachenchronik/releases/download/v1.1.0-test.4/dsa5-drachenchronik.zip",
+  "manifest": "https://raw.githubusercontent.com/saajid-antalar/dsa5-drachenchronik/v1.1.0-test.5/module.json",
+  "download": "https://github.com/saajid-antalar/dsa5-drachenchronik/releases/download/v1.1.0-test.5/dsa5-drachenchronik.zip",
   "esmodules": [
     "scripts/drachenchronik.js"
   ],
