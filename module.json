@@ -1,7 +1,7 @@
 {
   "id": "dsa5-drachenchronik",
   "title": "DSA5 – Drachenchronik",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "compatibility": {
     "minimum": "14",
     "verified": "14"
@@ -18,9 +18,9 @@
       }
     ]
   },
-  "description": "DrachenChronik-Erweiterungen für DSA5. Enthält den Tagesereignis-Generator sowie die Szene Oase Bischa mit 8K-Karte, korrigierter Wasseranimation und räumlich abgestimmten Umgebungsgeräuschen.",
+  "description": "DrachenChronik-Erweiterungen für DSA5. Enthält den Tagesereignis-Generator sowie die Szene Oase Bischa mit 8K-Karte, korrigierter Wasseranimation und vollständig in Foundry 14 definierten Umgebungsgeräuschen.",
   "manifest": "https://raw.githubusercontent.com/saajid-antalar/dsa5-drachenchronik/main/module.json",
-  "download": "https://github.com/saajid-antalar/dsa5-drachenchronik/releases/download/v1.1.4/dsa5-drachenchronik-1.1.4.zip",
+  "download": "https://github.com/saajid-antalar/dsa5-drachenchronik/releases/download/v1.1.5/dsa5-drachenchronik-1.1.5.zip",
   "esmodules": [
     "scripts/drachenchronik.js",
     "scripts/oase-bischa-import.js",
