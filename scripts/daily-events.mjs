@@ -24,13 +24,14 @@ const EVENTS = [
 ];
 
 Hooks.once("init", () => {
-  game.settings.register(MODULE_ID, "lastAventurianDay", {
-    name: "Zuletzt ausgelöster Aventurientag",
+  game.settings.register(MODULE_ID, "usedAventurianDays", {
+    name: "Bereits verwendete Aventurientage",
     scope: "world",
     config: false,
-    type: String,
-    default: ""
+    type: Object,
+    default: {}
   });
+  game.settings.registerMenu
   game.settings.registerMenu(MODULE_ID, "dailyEventMenu", {
     name: "Tagesereignis der Khôm",
     label: "Tagesereignis auslösen",
@@ -53,20 +54,24 @@ class DailyEventDialog extends FormApplication {
   }
 
   getData() {
-    return { lastDay: game.settings.get(MODULE_ID, "lastAventurianDay") };
+    const usedDays = game.settings.get(MODULE_ID, "usedAventurianDays");
+    const lastDay = Object.keys(usedDays).at(-1) ?? "";
+    return { lastDay };
   }
 
   async _updateObject(_event, formData) {
-    const day = String(formData.day ?? "").trim();
+    const day = String(formData.day ?? "").trim().replace(/\\s+/g, " ");
     if (!day) return ui.notifications.warn("Bitte den aventurischen Kalendertag eintragen.");
+    const dayKey = day.normalize("NFKC").toLocaleLowerCase("de").replace(/[.,]/g, "").replace(/\\s+/g, " ");
 
-    const previous = game.settings.get(MODULE_ID, "lastAventurianDay");
-    if (day === previous) {
+    const usedDays = game.settings.get(MODULE_ID, "usedAventurianDays");
+    if (usedDays[dayKey]) {
       return ui.notifications.warn(`Für ${day} wurde bereits ein Tagesereignis ausgelöst.`);
     }
 
-    // Reserve this Aventurian date before asynchronous work so a second GM cannot immediately reroll it.
-    await game.settings.set(MODULE_ID, "lastAventurianDay", day);
+    // Record this calendar day before asynchronous work so it cannot be rerolled later.
+    usedDays[dayKey] = day;
+    await game.settings.set(MODULE_ID, "usedAventurianDays", usedDays);
 
     const roll = await (new Roll("1d20")).evaluate();
     const index = Math.clamp(Number(roll.total) - 1, 0, EVENTS.length - 1);
