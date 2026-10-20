@@ -302,6 +302,7 @@ function createOrUpdateMacro({name, command, img, defaultOwnership}) {
     const updates = {};
     if (existing.command !== command) updates.command = command;
     if (existing.type !== "script") updates.type = "script";
+    if (existing.img !== img) updates.img = img;
     if (existing.ownership?.default !== defaultOwnership) {
       updates.ownership = {...existing.ownership, default: defaultOwnership};
     }
@@ -326,14 +327,14 @@ async function ensureMacros() {
 
   await createOrUpdateMacro({
     name: "☀️ Tagesereignis",
-    img: "icons/sundries/flags/banner-symbol-sun-gold.webp",
+    img: "modules/${MODULE_ID}/assets/sun.svg",
     defaultOwnership: observer,
     command: `game.modules.get("${MODULE_ID}")?.api?.trigger();`
   });
 
   await createOrUpdateMacro({
     name: "☀️ Tagesereignis – GM Reset",
-    img: "icons/svg/refresh.svg",
+    img: "modules/${MODULE_ID}/assets/reset.svg",
     defaultOwnership: none,
     command: `game.modules.get("${MODULE_ID}")?.api?.reset();`
   });
