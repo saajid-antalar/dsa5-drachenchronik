@@ -12,6 +12,6 @@ Beim Start der Welt erstellt das Modul die Makros **☀️ Tagesereignis** und *
 
 Das Modul enthält die gridlose Szene **Oase Bischa** mit der vollflächigen 8K-Karte (7680 × 5456 Pixel). Öffne im Szenen-Kompendium den Pack **Oase Bischa** und importiere die Szene in deine Welt.
 
-## Version 1.1.1
+## Version 1.1.2
 
 Die aktuelle Version wird über das Foundry-Installationsmanifest auf dem Hauptzweig und das neueste GitHub-Release verteilt.
