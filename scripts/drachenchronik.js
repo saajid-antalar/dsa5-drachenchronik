@@ -141,9 +141,13 @@ function weightedPick(items) {
 
 function getDateComponents() {
   try {
+    const calendar = game.time?.calendar;
+    if (typeof calendar?.timeToComponents === "function") {
+      return calendar.timeToComponents(game.time.worldTime);
+    }
     if (game.time?.components) return game.time.components;
   } catch (err) {
-    console.warn(`[${MODULE_ID}] Konnte game.time.components nicht lesen.`, err);
+    console.warn(`[${MODULE_ID}] Konnte Kalenderdatum nicht lesen.`, err);
   }
   return null;
 }
@@ -151,21 +155,29 @@ function getDateComponents() {
 function getDateKey() {
   const c = getDateComponents();
   if (!c) return `world-${Math.floor(game.time.worldTime / 86400)}`;
-  return `${c.year}-${c.month}-${c.day}`;
+  const dayOfMonth = Number.isInteger(c.dayOfMonth) ? c.dayOfMonth : c.day;
+  return `${c.year}-${c.month}-${dayOfMonth}`;
 }
 
 function getDateLabel() {
   const c = getDateComponents();
-  try {
-    const cal = game.time.calendar;
-    if (cal?.format) {
-      const formatted = cal.format(game.time.worldTime, "full");
-      if (formatted) return formatted;
+  const calendar = game.time?.calendar;
+  if (c) {
+    const dayOfMonth = Number.isInteger(c.dayOfMonth) ? c.dayOfMonth : c.day;
+    const day = dayOfMonth + 1;
+    const month = calendar?.months?.values?.[c.month];
+    if (month) {
+      const monthName = typeof calendar.translate === "function"
+        ? calendar.translate(month.name)
+        : month.name;
+      const suffixKey = CONFIG.time?.worldCalendarConfig?.years?.yearSuffix;
+      const suffix = suffixKey && typeof calendar.translate === "function"
+        ? ` ${calendar.translate(suffixKey)}`
+        : "";
+      return `${day}. ${monthName} ${c.year}${suffix}`;
     }
-  } catch (err) {
-    console.warn(`[${MODULE_ID}] Kalenderformat konnte nicht ermittelt werden.`, err);
+    return `${day}. Monat ${c.month + 1}, Jahr ${c.year}`;
   }
-  if (c) return `${c.day}. Monat ${c.month}, Jahr ${c.year}`;
   return `Welttag ${Math.floor(game.time.worldTime / 86400)}`;
 }
 
