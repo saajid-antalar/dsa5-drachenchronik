@@ -1,7 +1,7 @@
 {
   "id": "dsa5-drachenchronik",
   "title": "DSA5 – Drachenchronik",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "compatibility": {
     "minimum": "14",
     "verified": "14"
@@ -18,12 +18,13 @@
       }
     ]
   },
-  "description": "DrachenChronik-Erweiterungen für DSA5. Enthält den täglichen Reiseereignis-Generator für die Khôm mit aventurischer Tages-Sperre.",
+  "description": "DrachenChronik-Erweiterungen für DSA5. Enthält den Tagesereignis-Generator sowie die Szene Oase Bischa mit 8K-Karte, Wasseranimation und Umgebungsgeräuschen.",
   "manifest": "https://raw.githubusercontent.com/saajid-antalar/dsa5-drachenchronik/main/module.json",
-  "download": "https://github.com/saajid-antalar/dsa5-drachenchronik/releases/download/v1.1.2/dsa5-drachenchronik-1.1.2.zip",
+  "download": "https://github.com/saajid-antalar/dsa5-drachenchronik/releases/download/v1.1.3/dsa5-drachenchronik-1.1.3.zip",
   "esmodules": [
     "scripts/drachenchronik.js",
-    "scripts/oase-bischa-import.js"
+    "scripts/oase-bischa-import.js",
+    "scripts/oase-bischa-atmosphere.js"
   ],
   "socket": true,
   "url": "https://github.com/saajid-antalar/dsa5-drachenchronik",
