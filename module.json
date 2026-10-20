@@ -1,7 +1,7 @@
 {
   "id": "dsa5-drachenchronik",
   "title": "DSA5 – Drachenchronik",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "compatibility": {
     "minimum": "14",
     "verified": "14"
@@ -22,7 +22,8 @@
   "manifest": "https://raw.githubusercontent.com/saajid-antalar/dsa5-drachenchronik/main/module.json",
   "download": "https://github.com/saajid-antalar/dsa5-drachenchronik/releases/latest/download/dsa5-drachenchronik.zip",
   "esmodules": [
-    "scripts/drachenchronik.js"
+    "scripts/drachenchronik.js",
+    "scripts/oase-bischa-import.js"
   ],
   "socket": true,
   "url": "https://github.com/saajid-antalar/dsa5-drachenchronik",
