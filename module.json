@@ -1,7 +1,7 @@
 {
   "id": "dsa5-drachenchronik",
   "title": "DSA5 – Drachenchronik",
-  "version": "1.1.6",
+  "version": "1.2.0",
   "compatibility": {
     "minimum": "14",
     "verified": "14"
@@ -18,13 +18,17 @@
       }
     ]
   },
-  "description": "DrachenChronik-Erweiterungen für DSA5. Enthält den Tagesereignis-Generator sowie die Szene Oase Bischa mit 8K-Karte und hörbaren Umgebungsgeräuschen mit passenden Radien.",
+  "description": "DrachenChronik-Erweiterungen für DSA5. Enthält den Tagesereignis-Generator, die Szene Oase Bischa mit 8K-Karte und hörbaren Umgebungsgeräuschen mit passenden Radien sowie das Grabungsspiel „Die Ausgrabung“ mit eigener Khôm-Szene.",
   "manifest": "https://raw.githubusercontent.com/saajid-antalar/dsa5-drachenchronik/main/module.json",
-  "download": "https://github.com/saajid-antalar/dsa5-drachenchronik/releases/download/v1.1.6/dsa5-drachenchronik-1.1.6.zip",
+  "download": "https://github.com/saajid-antalar/dsa5-drachenchronik/releases/download/v1.2.0/dsa5-drachenchronik-1.2.0.zip",
   "esmodules": [
     "scripts/drachenchronik.js",
     "scripts/oase-bischa-import.js",
-    "scripts/oase-bischa-atmosphere.js"
+    "scripts/oase-bischa-atmosphere.js",
+    "scripts/ausgrabung/main.mjs"
+  ],
+  "styles": [
+    "styles/ausgrabung.css"
   ],
   "socket": true,
   "url": "https://github.com/saajid-antalar/dsa5-drachenchronik",

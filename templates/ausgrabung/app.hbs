@@ -1,0 +1,208 @@
+<div class="ausg-root">
+{{#if noScene}}
+  <section class="ausg-empty">
+    <h2>Noch keine Grabungsstätte</h2>
+    {{#if isGM}}
+      <p>Lege die Szene „Grabungsstätte im Khôm“ an. Sie bekommt den Wüstenhintergrund, das abgesteckte 10×10-Feld und einen neuen Grabungsplan.</p>
+      <button type="button" data-action="createScene"><i class="fa-solid fa-map"></i> Grabungsszene anlegen</button>
+    {{else}}
+      <p>Die Spielleitung hat die Grabungsszene noch nicht angelegt.</p>
+    {{/if}}
+  </section>
+{{else}}
+  <nav class="ausg-tabs">
+    <button type="button" data-action="tab" data-tab="spiel" class="{{#unless gmTab}}active{{/unless}}">Grabung</button>
+    {{#if isGM}}<button type="button" data-action="tab" data-tab="leitung" class="{{#if gmTab}}active{{/if}}">Spielleitung</button>{{/if}}
+    {{#unless onScene}}<button type="button" data-action="viewScene" class="ausg-goto"><i class="fa-solid fa-map-location-dot"></i> Zur Grabungsszene</button>{{/unless}}
+  </nav>
+
+  {{#if testActive}}
+  <div class="ausg-testbanner">
+    <span><b>Testmodus</b> · Würfe, Kosten und Schicksalspunkte zählen nicht. Die Heldenbögen bleiben unverändert.</span>
+    {{#if isGM}}
+      <button type="button" data-action="testReset"><i class="fa-solid fa-rotate-left"></i> Zurücksetzen</button>
+      <button type="button" data-action="testEnd"><i class="fa-solid fa-flag-checkered"></i> Testmodus beenden</button>
+    {{/if}}
+  </div>
+  {{/if}}
+
+  <div class="ausg-grid ausg-scroll">
+    <section class="ausg-left">
+      <div class="ausg-panel">
+        <h2>Grabungsplan</h2>
+        <div class="ausg-board">
+          {{#each board}}
+            {{#if lab}}<div class="ausg-lab">{{text}}</div>
+            {{else}}<button type="button" class="ausg-cell {{cls}}" style="{{style}}" data-action="cell" data-idx="{{idx}}" title="{{name}}" {{#if disabled}}disabled{{/if}}>
+              <span class="t">{{text}}</span>{{#if hint}}<span class="h">{{hint}}</span>{{/if}}{{#if ev}}<span class="e">{{ev}}</span>{{/if}}
+            </button>{{/if}}
+          {{/each}}
+        </div>
+        {{#if gmTab}}
+          <div class="ausg-row">
+            <span class="ausg-muted">Pinsel:</span>
+            {{#each paint}}<button type="button" data-action="paint" data-mode="{{mode}}" class="{{#if active}}active{{/if}}">{{label}}</button>{{/each}}
+          </div>
+          <p class="ausg-muted">In dieser Ansicht siehst nur du Gelände und Schlüsselfunde. Änderungen erscheinen sofort auf der Szene.</p>
+        {{else}}
+          <p class="ausg-muted">Zahl oben rechts: Spuren zu Schlüsselfunden in den acht Nachbarfeldern, „?“ = nichts erkannt. ◆ gutes Ereignis, ✕ Unglück.</p>
+        {{/if}}
+      </div>
+
+      {{#unless gmTab}}
+      <div class="ausg-panel">
+        <h2>Grabungsbuch</h2>
+        <ol class="ausg-log">
+          {{#each log}}<li><span class="d">Tag {{day}}</span> {{text}}</li>{{else}}<li class="ausg-muted">Noch kein Spatenstich.</li>{{/each}}
+        </ol>
+      </div>
+      {{/unless}}
+    </section>
+
+    <section class="ausg-right">
+    {{#if gmTab}}
+      <div class="ausg-panel ausg-testpanel">
+        <h2>Testmodus</h2>
+        {{#if testActive}}
+          <label class="ausg-lead">Nächster W20 beim Graben
+            <select data-test-force>
+              {{#each forceOptions}}<option value="{{v}}" {{#if selected}}selected{{/if}}>{{label}}</option>{{/each}}
+            </select>
+          </label>
+          <p class="ausg-muted">Mit einem festen Wert lässt sich jedes Ereignis gezielt auslösen (Glück, Gelände und fehlende Balken werden noch verrechnet). „Zurücksetzen“ stellt den Stand vom Teststart wieder her und löscht die Testnachrichten im Chat.</p>
+          <div class="ausg-row">
+            <button type="button" data-action="testReset"><i class="fa-solid fa-rotate-left"></i> Zurücksetzen</button>
+            <button type="button" data-action="testEnd"><i class="fa-solid fa-flag-checkered"></i> Testmodus beenden</button>
+          </div>
+        {{else}}
+          <p class="ausg-muted">Zum Ausprobieren vor der Sitzung: Der aktuelle Stand wird gemerkt, danach kann beliebig gegraben werden. Schicksalspunkte werden nur vorgemerkt, nicht aus den Bögen abgezogen.</p>
+          <div class="ausg-row"><button type="button" data-action="testStart"><i class="fa-solid fa-flask"></i> Testmodus starten</button></div>
+        {{/if}}
+      </div>
+      <div class="ausg-panel">
+        <h2>Kasse und Lohn</h2>
+        <div class="ausg-fields">
+          <label>Startkasse (S)<input type="number" data-setting="start" value="{{settings.start}}"></label>
+          <label>Start-Holz (Balken)<input type="number" data-setting="wood" value="{{settings.wood}}"></label>
+          <label>Verfügbare Tage<input type="number" data-setting="days" value="{{settings.days}}"></label>
+          <label>Lohn je Arbeiter und Tag (S)<input type="number" step="0.1" data-setting="wage" value="{{settings.wage}}"></label>
+          <label>Preis je Balken (S)<input type="number" step="0.1" data-setting="woodPrice" value="{{settings.woodPrice}}"></label>
+          <label>Angeheuerte Arbeiter<input type="number" data-setting="workers" value="{{settings.workers}}"></label>
+        </div>
+        <p class="ausg-muted">Startwerte gelten nach „Grabung neu starten“. Lohn, Preise und Arbeiter wirken sofort.</p>
+      </div>
+      <div class="ausg-panel">
+        <h2>Gelände unter der Oberfläche</h2>
+        <table class="ausg-table">
+          <thead><tr><th>Gelände</th><th>Kurz</th><th>Anteil</th><th>Tage</th><th>Arbeiter</th><th>Balken</th><th>Mod.</th></tr></thead>
+          <tbody>
+          {{#each terrain}}
+            <tr>
+              <td><input type="text" data-terrain="{{i}}" data-field="name" value="{{name}}"></td>
+              <td><input type="text" data-terrain="{{i}}" data-field="short" value="{{short}}"></td>
+              <td><input type="number" data-terrain="{{i}}" data-field="w" value="{{w}}"></td>
+              <td><input type="number" data-terrain="{{i}}" data-field="days" value="{{days}}"></td>
+              <td><input type="number" data-terrain="{{i}}" data-field="workers" value="{{workers}}"></td>
+              <td><input type="number" data-terrain="{{i}}" data-field="wood" value="{{wood}}"></td>
+              <td><input type="number" data-terrain="{{i}}" data-field="mod" value="{{mod}}"></td>
+            </tr>
+          {{/each}}
+          </tbody>
+        </table>
+        <p class="ausg-muted">„Anteil“ wirkt erst nach „Gelände neu verteilen“.</p>
+      </div>
+      <div class="ausg-panel">
+        <h2>Schlüsselfunde</h2>
+        <table class="ausg-table">
+          <tbody>
+          {{#each keys}}<tr><td class="ausg-k">{{name}}</td><td><input type="text" data-key="{{idx}}" value="{{text}}"></td></tr>
+          {{else}}<tr><td class="ausg-muted">Mit dem Pinsel „Schlüsselfund“ Felder markieren.</td></tr>{{/each}}
+          </tbody>
+        </table>
+      </div>
+      <div class="ausg-panel">
+        <h2>Heldengruppe</h2>
+        <div class="ausg-checks">
+          {{#each actors}}<label><input type="checkbox" data-party="{{id}}" {{#if inParty}}checked{{/if}}> {{name}}</label>{{/each}}
+        </div>
+      </div>
+      <div class="ausg-panel">
+        <h2>Verwaltung</h2>
+        <div class="ausg-row">
+          <button type="button" data-action="reset"><i class="fa-solid fa-rotate-left"></i> Grabung neu starten</button>
+          <button type="button" data-action="regen"><i class="fa-solid fa-shuffle"></i> Gelände neu verteilen</button>
+          <button type="button" data-action="sync"><i class="fa-solid fa-border-all"></i> Kacheln neu aufbauen</button>
+        </div>
+        <p class="ausg-muted">„Neu starten“ setzt Kasse, Tage und alle gegrabenen Felder zurück. Gelände und Schlüsselfunde bleiben.</p>
+      </div>
+    {{else}}
+      <div class="ausg-panel">
+        <h2>Expeditionskasse</h2>
+        <div class="ausg-res">
+          {{#each res}}<div class="{{#if neg}}neg{{/if}}"><b>{{v}}</b><span>{{k}}</span></div>{{/each}}
+        </div>
+        <div class="ausg-row">
+          <button type="button" data-action="buyWood" {{#unless canBuyWood}}disabled{{/unless}}><i class="fa-solid fa-plus"></i> Stützbalken kaufen</button>
+          <span class="ausg-muted">{{woodPrice}} S je Balken{{#if bonusDay}} · nächster Abschnitt 1 Tag kürzer{{/if}}</span>
+        </div>
+      </div>
+
+      <div class="ausg-panel">
+        <h2>Nächster Abschnitt</h2>
+        {{#if sel}}
+          <h3>Abschnitt {{sel.name}} öffnen</h3>
+          <label class="ausg-lead">Grabungsleitung
+            <select data-leader>
+              <option value="">– wählen –</option>
+              {{#each leaderOptions}}<option value="{{id}}" {{#if selected}}selected{{/if}}>{{name}}{{#if note}} ({{note}}){{/if}}</option>{{/each}}
+            </select>
+          </label>
+          {{#if sel.preview}}<p class="ausg-muted">SL-Vorschau: {{sel.preview}}</p>{{/if}}
+          <div class="ausg-row">
+            <button type="button" class="primary" data-action="dig" {{#unless hasLeader}}disabled{{/unless}}><i class="fa-solid fa-dice-d20"></i> Graben und würfeln</button>
+            <button type="button" data-action="clear">Abbrechen</button>
+          </div>
+        {{else}}
+          <p class="ausg-muted">Feld im Plan anklicken oder auf der Karte wählen. Was darunter liegt, was es kostet und was dort geschieht, zeigt sich erst beim Graben.</p>
+          <div class="ausg-row">
+            <button type="button" data-action="pick"><i class="fa-solid fa-crosshairs"></i> Feld auf der Karte wählen</button>
+          </div>
+          <label class="ausg-lead">Grabungsleitung
+            <select data-leader>
+              <option value="">– wählen –</option>
+              {{#each leaderOptions}}<option value="{{id}}" {{#if selected}}selected{{/if}}>{{name}}{{#if note}} ({{note}}){{/if}}</option>{{/each}}
+            </select>
+          </label>
+        {{/if}}
+        {{#if last}}<div class="ausg-last">{{{last}}}</div>{{/if}}
+      </div>
+
+      <div class="ausg-panel">
+        <h2>Helden vor Ort</h2>
+        {{#if noHeroes}}<p class="ausg-muted">Keine Helden in der Gruppe. Die Spielleitung wählt sie im Reiter „Spielleitung“.</p>{{/if}}
+        <div class="ausg-heroes">
+          {{#each heroes}}
+            <div class="ausg-hero {{#if isLeader}}lead{{/if}} {{#unless present}}absent{{/unless}}">
+              <input type="checkbox" data-present="{{id}}" {{#if present}}checked{{/if}} {{#unless canEdit}}disabled{{/unless}} title="arbeitet heute mit">
+              <img src="{{img}}" alt="">
+              <div>
+                <div class="nm">{{name}}{{#if isLeader}} <span class="ausg-muted">· leitet</span>{{/if}}</div>
+                <div class="chips">{{#each tags}}<span class="chip {{cls}}">{{text}}</span>{{/each}}</div>
+              </div>
+              <span class="schip" title="Schicksalspunkte aus dem Heldenbogen">SchiP {{schip}}/{{schipMax}}</span>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+
+      <div class="ausg-panel">
+        <h2>Fundliste</h2>
+        <ul class="ausg-finds">
+          {{#each finds}}<li>{{#if key}}✦ {{/if}}{{cell}}: {{text}}</li>{{else}}<li class="ausg-muted">Noch nichts gefunden.</li>{{/each}}
+        </ul>
+      </div>
+    {{/if}}
+    </section>
+  </div>
+{{/if}}
+</div>

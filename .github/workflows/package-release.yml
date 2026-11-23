@@ -22,6 +22,8 @@ jobs:
           cp module.json package/module.json
           cp -R scripts package/scripts
           cp -R assets package/assets
+          cp -R templates package/templates
+          cp -R styles package/styles
           (cd package && zip -qr ../dsa5-drachenchronik.zip .)
 
       - name: Attach archive to release
