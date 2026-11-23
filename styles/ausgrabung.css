@@ -1,0 +1,123 @@
+/* DSA – Die Ausgrabung: Grabungsplan auf Wüstenpapier */
+.dsa-ausgrabung {
+  --ausg-sand: #efe3c8;
+  --ausg-sand-deep: #e2d1ab;
+  --ausg-ink: #3a2a1a;
+  --ausg-ink-soft: #6f5a40;
+  --ausg-lapis: #23407a;
+  --ausg-ochre: #a3401f;
+  --ausg-verd: #2f6b55;
+}
+.dsa-ausgrabung .window-content {
+  background: var(--ausg-sand);
+  color: var(--ausg-ink);
+  padding: 0;
+}
+.dsa-ausgrabung .ausg-root { height: 100%; display: flex; flex-direction: column; }
+.dsa-ausgrabung h2 {
+  font-family: "Modesto Condensed", "Palatino Linotype", Georgia, serif;
+  font-size: 1.35em; font-weight: 400; margin: 0 0 6px; border: none; color: var(--ausg-ink); letter-spacing: .02em;
+}
+.dsa-ausgrabung h3 { font-size: 1.05em; margin: 0 0 6px; border: none; color: var(--ausg-ink); }
+.dsa-ausgrabung button {
+  color: var(--ausg-ink); background: transparent; border: 1px solid var(--ausg-ink);
+  border-radius: 2px; padding: 3px 10px; line-height: 1.6; width: auto; flex: 0 0 auto; cursor: pointer;
+}
+.dsa-ausgrabung button:hover:not(:disabled) { background: var(--ausg-sand-deep); }
+.dsa-ausgrabung button.primary, .dsa-ausgrabung button.active { background: var(--ausg-ink); color: var(--ausg-sand); }
+.dsa-ausgrabung button:disabled { opacity: .45; cursor: not-allowed; }
+.dsa-ausgrabung input, .dsa-ausgrabung select { color: var(--ausg-ink); background: rgba(255,255,255,.55); border: 1px solid var(--ausg-ink-soft); }
+
+.dsa-ausgrabung .ausg-tabs { display: flex; gap: 6px; padding: 8px 12px; border-bottom: 2px solid var(--ausg-ink); }
+.dsa-ausgrabung .ausg-goto { margin-left: auto; }
+.dsa-ausgrabung .ausg-grid { flex: 1; overflow: auto; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(300px, 1fr); gap: 14px; padding: 12px; align-content: start; }
+.dsa-ausgrabung .ausg-left, .dsa-ausgrabung .ausg-right { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.dsa-ausgrabung .ausg-panel { border: 1.5px solid var(--ausg-ink); padding: 10px 12px; background: rgba(255,255,255,.22); }
+.dsa-ausgrabung .ausg-muted { color: var(--ausg-ink-soft); font-size: .9em; margin: 6px 0 0; }
+.dsa-ausgrabung .ausg-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 8px; }
+.dsa-ausgrabung .ausg-empty { padding: 24px; }
+
+/* Brett */
+.dsa-ausgrabung .ausg-board { display: grid; grid-template-columns: 22px repeat(10, minmax(28px, 1fr)); gap: 2px; }
+.dsa-ausgrabung .ausg-lab { display: flex; align-items: center; justify-content: center; color: var(--ausg-ink-soft); font-family: Georgia, serif; }
+.dsa-ausgrabung .ausg-cell {
+  aspect-ratio: 1; position: relative; padding: 0; margin: 0; border: 1px solid var(--ausg-ink-soft);
+  background: var(--ausg-sand-deep); font-size: .62em; line-height: 1.05; overflow: hidden; display: flex; align-items: center; justify-content: center;
+}
+.dsa-ausgrabung .ausg-cell:hover:not(:disabled) { outline: 2px solid var(--ausg-ink); background: #d8c296; }
+.dsa-ausgrabung .ausg-cell:disabled { opacity: 1; cursor: default; }
+.dsa-ausgrabung .ausg-cell.out { background: repeating-linear-gradient(45deg, transparent 0 4px, rgba(58,42,26,.22) 4px 5px); border-color: transparent; }
+.dsa-ausgrabung .ausg-cell.dug { color: #fff; border-color: var(--ausg-ink); font-weight: 700; text-shadow: 0 1px 1px rgba(0,0,0,.6); }
+.dsa-ausgrabung .ausg-cell.sel { outline: 3px solid var(--ausg-lapis); outline-offset: -3px; }
+.dsa-ausgrabung .ausg-cell.key { box-shadow: inset 0 0 0 3px #e7c14a; }
+.dsa-ausgrabung .ausg-cell.gmkey::after { content: "✦"; position: absolute; top: 0; right: 2px; color: var(--ausg-lapis); font-size: 1.4em; }
+.dsa-ausgrabung .ausg-cell .h { position: absolute; top: 0; right: 2px; font-size: 1.35em; }
+.dsa-ausgrabung .ausg-cell .e { position: absolute; bottom: 0; left: 2px; font-size: 1.2em; }
+
+/* Kasse */
+.dsa-ausgrabung .ausg-res { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.dsa-ausgrabung .ausg-res div { border-left: 3px solid var(--ausg-ink); padding: 0 6px; }
+.dsa-ausgrabung .ausg-res b { display: block; font-size: 1.6em; font-family: Georgia, serif; font-weight: 400; font-variant-numeric: tabular-nums; }
+.dsa-ausgrabung .ausg-res span { font-size: .75em; text-transform: uppercase; letter-spacing: .05em; color: var(--ausg-ink-soft); }
+.dsa-ausgrabung .ausg-res .neg b { color: var(--ausg-ochre); }
+.dsa-ausgrabung .ausg-lead { display: flex; flex-direction: column; gap: 2px; margin-top: 8px; font-size: .9em; }
+
+/* Helden */
+.dsa-ausgrabung .ausg-heroes { display: flex; flex-direction: column; gap: 4px; }
+.dsa-ausgrabung .ausg-hero { display: grid; grid-template-columns: auto 34px 1fr auto; gap: 6px; align-items: center; padding: 4px 6px; border: 1px solid rgba(58,42,26,.35); }
+.dsa-ausgrabung .ausg-hero img { width: 34px; height: 34px; object-fit: cover; border: 1px solid var(--ausg-ink-soft); }
+.dsa-ausgrabung .ausg-hero.lead { border: 2px solid var(--ausg-lapis); background: rgba(35,64,122,.07); }
+.dsa-ausgrabung .ausg-hero.absent { opacity: .45; }
+.dsa-ausgrabung .ausg-hero .nm { font-weight: 700; }
+.dsa-ausgrabung .chips { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 2px; }
+.dsa-ausgrabung .chip { font-size: .72em; padding: 0 5px; border: 1px solid currentColor; border-radius: 9px; white-space: nowrap; }
+.dsa-ausgrabung .chip.good { color: var(--ausg-lapis); }
+.dsa-ausgrabung .chip.bad { color: var(--ausg-ochre); }
+.dsa-ausgrabung .chip.neu { color: var(--ausg-verd); }
+.dsa-ausgrabung .schip { font-size: .85em; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+.dsa-ausgrabung .ausg-log { list-style: none; margin: 0; padding: 0; max-height: 260px; overflow: auto; font-size: .88em; }
+.dsa-ausgrabung .ausg-log li { padding: 3px 0; border-bottom: 1px dotted rgba(58,42,26,.35); }
+.dsa-ausgrabung .ausg-log .d { color: var(--ausg-ink-soft); font-family: Georgia, serif; }
+.dsa-ausgrabung .ausg-finds { margin: 0; padding-left: 18px; font-size: .9em; }
+.dsa-ausgrabung .ausg-last { margin-top: 10px; }
+
+/* Spielleitung */
+.dsa-ausgrabung .ausg-fields { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; }
+.dsa-ausgrabung .ausg-fields label { display: flex; flex-direction: column; gap: 2px; font-size: .85em; }
+.dsa-ausgrabung .ausg-table { width: 100%; border-collapse: collapse; font-size: .85em; margin: 0; background: none; border: none; }
+.dsa-ausgrabung .ausg-table th { text-align: left; font-weight: 500; color: var(--ausg-ink-soft); background: none; }
+.dsa-ausgrabung .ausg-table td, .dsa-ausgrabung .ausg-table th { padding: 2px 3px; border-bottom: 1px solid rgba(58,42,26,.25); }
+.dsa-ausgrabung .ausg-table tr:nth-child(even) { background: none; }
+.dsa-ausgrabung .ausg-table input[type=number] { width: 48px; }
+.dsa-ausgrabung .ausg-table input[type=text] { width: 100%; }
+.dsa-ausgrabung .ausg-k { width: 40px; font-weight: 700; }
+.dsa-ausgrabung .ausg-checks { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 4px; }
+
+/* Ergebniskarte (Chat und Fenster) */
+.ausg-card { border: 1.5px solid #3a2a1a; background: #efe3c8; color: #3a2a1a; padding: 8px 10px; }
+.ausg-card header { display: flex; gap: 10px; align-items: center; border-bottom: 1px dashed #6f5a40; padding-bottom: 6px; margin-bottom: 6px; }
+.ausg-card h3 { margin: 0; border: none; font-size: 1.15em; color: #3a2a1a; }
+.ausg-card .ausg-sub { font-size: .9em; color: #6f5a40; }
+.ausg-card .ausg-tot { font-family: Georgia, serif; font-size: 2.2em; line-height: 1; min-width: 1.4em; text-align: center; }
+.ausg-card.ausg-good .ausg-tot, .ausg-card.ausg-good .ausg-evt { color: #23407a; }
+.ausg-card.ausg-bad .ausg-tot, .ausg-card.ausg-bad .ausg-evt { color: #a3401f; }
+.ausg-card .ausg-evt { font-size: 1.1em; margin: 6px 0 2px; border: none; }
+.ausg-card p { margin: 3px 0; }
+.ausg-card .ausg-cost, .ausg-card .ausg-calc { font-size: .85em; color: #6f5a40; }
+.ausg-card .ausg-badtext { color: #a3401f; }
+.ausg-card .ausg-key { margin-top: 6px; padding: 5px 7px; background: rgba(231,193,74,.25); border: 1px solid #b8942a; }
+.ausg-card .ausg-reroll { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; margin-top: 8px; font-size: .9em; }
+.ausg-card .ausg-reroll button { width: auto; flex: 0 0 auto; line-height: 1.5; padding: 0 8px; font-size: .9em; color: #3a2a1a; background: transparent; border: 1px solid #3a2a1a; }
+.ausg-card .ausg-reroll button:hover { background: #e2d1ab; }
+
+/* Testmodus */
+.dsa-ausgrabung .ausg-testbanner {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 6px 12px;
+  background: repeating-linear-gradient(135deg, #f3d77a 0 14px, #ecc95a 14px 28px); color: #3a2a1a; border-bottom: 2px solid #3a2a1a;
+}
+.dsa-ausgrabung .ausg-testbanner span { flex: 1 1 260px; }
+.dsa-ausgrabung .ausg-testpanel { border-style: dashed; background: rgba(243, 215, 122, .25); }
+.ausg-card .ausg-testbar { margin: -8px -10px 6px; padding: 2px 10px; font-size: .8em; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  background: repeating-linear-gradient(135deg, #f3d77a 0 10px, #ecc95a 10px 20px); color: #3a2a1a; }
+.ausg-testtag { background: #ecc95a; color: #3a2a1a; padding: 0 4px; border-radius: 2px; }
